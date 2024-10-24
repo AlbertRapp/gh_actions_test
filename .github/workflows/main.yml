@@ -10,6 +10,9 @@ jobs:
   render:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # Grant write permissions to the repository
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4.2.2
