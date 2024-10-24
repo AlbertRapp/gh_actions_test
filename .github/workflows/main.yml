@@ -20,6 +20,12 @@ jobs:
       with:
         version: LATEST
 
+    # 
+    - name: Install R dependencies
+      run: |
+        Rscript -e "install.packages('renv')"
+        Rscript -e "renv::restore()"
+        
     # Render the readme.qmd to README.md
     - name: Render Quarto document
       run: |
