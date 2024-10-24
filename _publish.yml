@@ -1,0 +1,4 @@
+- source: readme.qmd
+  netlify:
+    - id: 23b8fd7d-615e-4c41-adb4-e017dcbaa2d6
+      url: 'https://lovely-snickerdoodle-063df5.netlify.app'
