@@ -26,8 +26,8 @@ jobs:
     # 
     - name: Install R dependencies
       run: |
-        Rscript -e "install.packages('renv')"
-        Rscript -e "renv::restore()"
+        Rscript -e "install.packages('renv', repos = 'https://packagemanager.posit.co/cran/latest')"
+        Rscript -e "renv::restore(repos = 'https://packagemanager.posit.co/cran/latest')"
         
     # Render the readme.qmd to README.md
     - name: Render Quarto document
