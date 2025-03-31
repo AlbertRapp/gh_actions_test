@@ -10,7 +10,8 @@ on:
 jobs:
   render:
     runs-on: ubuntu-latest
-
+    container:
+      image: rocker/r-ver:4.3.1
     permissions:
       contents: write  # Grant write permissions to the repository
 
