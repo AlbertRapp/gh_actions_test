@@ -1,4 +1,4 @@
-name: Render README
+name: Collect time series
 
 # This workflow will run on push or pull requests to the main branch
 on:
@@ -11,7 +11,7 @@ jobs:
   render:
     runs-on: ubuntu-latest
     container:
-      image: rocker/r-ver:4.3.1
+      image: rocker/r-ver:latest
     permissions:
       contents: write  # Grant write permissions to the repository
 
