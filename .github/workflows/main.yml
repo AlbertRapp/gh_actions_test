@@ -18,22 +18,18 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4.2.2
 
-    # Install Quarto CLI
-    - name: Set up Quarto
-      uses: quarto-dev/quarto-actions/setup@v2
-      with:
-        version: LATEST
-
-    # 
     - name: Install R dependencies
       run: |
         Rscript -e "install.packages('renv', repos = 'https://packagemanager.posit.co/cran/latest')"
         Rscript -e "renv::restore(repos = 'https://packagemanager.posit.co/cran/latest')"
         
-    # Render the readme.qmd to README.md
-    - name: Render Quarto document
+    - name: Collect data with pins
       run: |
-        quarto render readme.qmd --to gfm --output README.md
+        Rscript pins-demo.R
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}} 
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION}}
 
     # Commit and push changes to README.md
     - name: Commit README.md
@@ -45,10 +41,3 @@ jobs:
         git push
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-    - name: Publish to Netlify
-      run: |
-        quarto publish readme.qmd
-      env:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
